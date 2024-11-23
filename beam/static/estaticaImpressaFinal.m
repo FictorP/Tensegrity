@@ -2,7 +2,7 @@ clear all
 close all
 clc
 
-% Determina a posiÁ„o est·tica final em cada uma das situaÁıes ensaiadas
+% Determina a posi√ß√£o est√°tica final em cada uma das situa√ß√µes ensaiadas
 
 CoEns(:,:,1) = [0.05	-0.05
 -1.19	9.99
@@ -94,7 +94,7 @@ loads=loads*1.05;
 
 %CoEns = pos(:,:,posicao);
 
-% IncidÍncia (no1, no2, 1 = cabo)
+% Incid√™ncia (no1, no2, 1 = cabo)
 Inc =   [   1	2	1
             2	3	1
             3	4	1
@@ -126,7 +126,7 @@ Inc =   [   1	2	1
             12	6	0
             13	7	0];
 
-% RestriÁıes [nÛ, GDL]
+% Restri√ß√µes [n√≥, GDL]
 R = [   1	1
         1	2
         8	1
@@ -135,11 +135,11 @@ R = [   1	1
 % Massa da estrutura [kg]
 m = .29*14/12;
 
-% PosiÁ„o da base [m]
+% Posi√ß√£o da base [m]
 xB = .42;
 yB = .01;
 
-% NÛ em que o cabo est· preso
+% N√≥ em que o cabo est√° preso
 noc = 14;
 
 % Discretizacao
@@ -185,10 +185,10 @@ lR = lR*.935;
 % Lado da secao do cabo [m]
 dCabo = 1.5e-3;
 
-% ¡rea da seÁ„o (um el·stico s„o dois cabos)
+% √Årea da se√ß√£o (um el√°stico s√£o dois cabos)
 Acabo = dCabo^2*4;
 
-% MÛdulo Young do elastico [Pa]
+% M√≥dulo Young do elastico [Pa]
 Ecabo = 3e6*.75;
 
 % Rigidez linear dos cabos [N/m]
@@ -197,11 +197,11 @@ Klin = Ecabo*Acabo./lR;
 % Rigidez linear da barra [N/m]
 KlinB = 2e9*(.008*.015)/.151;
 
-% Escolher a posiÁ„o
+% Escolher a posi√ß√£o
 %posicao = 5;
 for posicao = 1:5
 
-% Coordenadas naturais dos nÛs (sem peso nem carga) [m]
+% Coordenadas naturais dos n√≥s (sem peso nem carga) [m]
 Co = [-0.11	0.07
     -1.21	9.61
     -0.97	17.57
@@ -218,7 +218,7 @@ Co = [-0.11	0.07
     11.02	50.73]/100;
 Co1 = Co;    
     
-% ForÁa no cabo [N]
+% For√ßa no cabo [N]
 Fc = loads(posicao)*9.81;
 
 % Comprimento final do cabo que puxa [m]
@@ -242,7 +242,7 @@ for g = 1:p
     Fa = Fc/p;
     %Fa = Fc(3)*3*g^2/p^3;
     
-    % ForÁa do cabo [N]
+    % For√ßa do cabo [N]
     xp = Co(noc,1);
     yp = Co(noc,2);
     Lc = sqrt((xB-xp)^2 + (yB-yp)^2);
@@ -260,10 +260,10 @@ for g = 1:p
     end    
     
     
-    % Aplicar as restriÁıes
+    % Aplicar as restri√ß√µes
     li = (R(:,1)-1)*2+R(:,2);
 
-    % Ordenar decrescente para viabilizar remoÁ„o das linhas
+    % Ordenar decrescente para viabilizar remo√ß√£o das linhas
     li = sort(li,'descend');    
     
     % Remover os gdls restritos
@@ -276,7 +276,7 @@ for g = 1:p
     % Resolver o sistema
     u = Kg\f;
 
-    % Inserir em u1 os deslocamentos zerados pelas restriÁıes
+    % Inserir em u1 os deslocamentos zerados pelas restri√ß√µes
     u1 = zeros(length(Co)*2,1);
     li = sort(li);
     q = 1;
@@ -292,7 +292,7 @@ for g = 1:p
             end
     end
     
-    % Encontrar a densidade de forÁa de cada elemento [N/m]
+    % Encontrar a densidade de for√ßa de cada elemento [N/m]
     [ df2 ] = densidadeForca( Inc,Co,u1, Klin,lR );
     
     dfg(:,g) = df2;
@@ -306,10 +306,10 @@ end
 % Deslocamento total [m]
 utot = Co-Co1;
 
-% Fator de ampliaÁ„o
+% Fator de amplia√ß√£o
 amp = 1;%.05*max(max(Co))/max(abs(u));
 
-% Encontrar n˙mero de membros
+% Encontrar n√∫mero de membros
 [nm,~] = size(Inc);
 
 % Erro
