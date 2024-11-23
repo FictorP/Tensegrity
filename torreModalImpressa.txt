@@ -1,0 +1,627 @@
+FINISH
+/CLEAR,NOSTART  
+
+!================== Propriedades
+
+Acabo = 3.1416*0.0012*0.0012*2
+Abarra = 0.008*0.015
+Anylon = 3.1416*0.0004*0.0004/4
+Ecabo = 2.25e6
+Ebarra = 2e9
+Enylon = 1.51e9 !http://www.markedbyteachers.com/as-and-a-level/science/young-s-modulus-of-nylon.html
+dBarra = 0.29*14/12/12/0.008/0.015/0.151 
+cargapuxa = 0.31
+
+
+
+!================== Posicoes deformadas
+
+n1x = -0.000500000000000000
+n2x = 0.0105000000000000
+n3x = 0.0622000000000000
+n4x = 0.140000000000000
+n5x = 0.234600000000000
+n6x = 0.325100000000000
+n7x = 0.419700000000000
+n8x = 0.106000000000000
+n9x = 0.130900000000000
+n10x = 0.162200000000000
+n11x = 0.200600000000000
+n12x = 0.253500000000000
+n13x = 0.322400000000000
+n14x = 0.411400000000000
+
+
+n1y = 0.000600000000000000
+n2y = 0.121600000000000
+n3y = 0.209400000000000
+n4y = 0.266400000000000
+n5y = 0.292800000000000
+n6y = 0.297600000000000
+n7y = 0.281000000000000
+n8y = 0.00190000000000000
+n9y = 0.0708000000000000
+n10y = 0.113300000000000
+n11y = 0.141800000000000
+n12y = 0.162100000000000
+n13y = 0.163400000000000
+n14y = 0.168300000000000
+
+
+n15x = .42
+n15y = .01
+
+!================== Comprimentos naturais
+
+!l1 = 0.1090
+!l2 = 0.1100
+!l3 = 0.1100
+!l4 = 0.1090
+!l5 = 0.1070
+!l6 = 0.1111
+!l7 = 0.1100
+!l8 = 0.1080
+!l9 = 0.1070
+!l10 = 0.1090
+!l11 = 0.1070
+!l12 = 0.1101
+!l13 = 0.1061
+!l14 = 0.1141
+!l15 = 0.1111
+!l16 = 0.1101
+!l17 = 0.1110
+!l18 = 0.1130
+
+l1 = 0.0780000000000000
+l2 = 0.0780000000000000
+l3 = 0.0780000000000000
+l4 = 0.0780000000000000
+l5 = 0.0780000000000000
+l6 = 0.0780000000000000
+l7 = 0.104000000000000
+l8 = 0.104000000000000
+l9 = 0.104000000000000
+l10 = 0.104000000000000
+l11 = 0.104000000000000
+l12 = 0.104000000000000
+l13 = 0.0780000000000000
+l14 = 0.0780000000000000
+l15 = 0.0780000000000000
+l16 = 0.0780000000000000
+l17 = 0.0780000000000000
+l18 = 0.0780000000000000
+
+
+/PREP7
+!================== Elemento de barra
+ET,1,LINK180
+ET,2,BEAM188
+
+!================== Secoes
+SECTYPE,1,LINK, ,CABO
+SECDATA,Acabo,
+SECCONTROL,0,1 !Tracao e compressao
+
+SECTYPE,2,LINK, ,BARRA
+SECDATA,Abarra,
+SECCONTROL,0,1
+
+SECTYPE,3,LINK, ,NYLON
+SECDATA,Anylon,
+SECCONTROL,0,1
+
+! SECTYPE,   2, BEAM, RECT, , 0   
+! SECOFFSET, CENT 
+! SECDATA,.008,.015,0,0,0,0,0,0,0,0,0,0
+
+!================== Materiais
+!* Cabo
+MPTEMP,,,,,,,,
+MPTEMP,1,0
+MPDATA,EX,1,,Ecabo
+MPDATA,PRXY,1,,
+
+!* Barra
+MPTEMP,,,,,,,,
+MPTEMP,1,0
+MPDATA,EX,2,,Ebarra
+MPDATA,PRXY,2,,
+MPDATA,DENS,2,,dBarra
+
+!* Nylon (cabo que puxa)
+MPTEMP,,,,,,,,
+MPTEMP,1,0
+MPDATA,EX,3,,Enylon
+MPDATA,PRXY,3,,
+
+!================== Keypoints
+K,1,n1x,n1y,0
+K,2,n2x,n2y,0
+K,3,n3x,n3y,0
+K,4,n4x,n4y,0
+K,5,n5x,n5y,0
+K,6,n6x,n6y,0
+K,7,n7x,n7y,0
+K,8,n8x,n8y,0
+K,9,n9x,n9y,0
+K,10,n10x,n10y,0
+K,11,n11x,n11y,0
+K,12,n12x,n12y,0
+K,13,n13x,n13y,0
+K,14,n14x,n14y,0
+
+K,15,n15x,n15y,0
+
+!================== Linhas dos cabos
+LSTR,       1,       2
+LSTR,       2,       3
+LSTR,       3,       4
+LSTR,       4,       5
+LSTR,       5,       6
+LSTR,       6,       7
+LSTR,       8,       9
+LSTR,       9,      10
+LSTR,      10,      11
+LSTR,      11,      12
+LSTR,      12,      13
+LSTR,      13,      14
+LSTR,       7,      14
+LSTR,       6,      13
+LSTR,       5,      12
+LSTR,       4,      11
+LSTR,       3,      10
+LSTR,       2,       9
+
+!================== Linhas das barras
+LSTR,       1,       9
+LSTR,       2,      10
+LSTR,       3,      11
+LSTR,       4,      12
+LSTR,       5,      13
+LSTR,       6,      14
+LSTR,       8,       2
+LSTR,       9,       3
+LSTR,      10,       4
+LSTR,      11,       5
+LSTR,      12,       6
+LSTR,      13,       7
+
+LSTR,      15,       14
+
+
+FINISH
+/POST1
+FINISH
+/PREP7
+
+
+
+!================== Malha dos cabos
+
+LESIZE,ALL, , ,1, ,1, , ,1,
+
+TYPE,   1
+MAT,       1
+REAL,
+ESYS,       0
+SECNUM,   1
+LMESH,      1
+
+TYPE,   1
+MAT,       1
+REAL,
+ESYS,       0
+SECNUM,   1
+LMESH,      2
+
+TYPE,   1
+MAT,       1
+REAL,
+ESYS,       0
+SECNUM,   1
+LMESH,      3
+
+TYPE,   1
+MAT,       1
+REAL,
+ESYS,       0
+SECNUM,   1
+LMESH,      4
+
+TYPE,   1
+MAT,       1
+REAL,
+ESYS,       0
+SECNUM,   1
+LMESH,      5
+
+TYPE,   1
+MAT,       1
+REAL,
+ESYS,       0
+SECNUM,   1
+LMESH,      6
+
+TYPE,   1
+MAT,       1
+REAL,
+ESYS,       0
+SECNUM,   1
+LMESH,      7
+
+TYPE,   1
+MAT,       1
+REAL,
+ESYS,       0
+SECNUM,   1
+LMESH,      8
+
+TYPE,   1
+MAT,       1
+REAL,
+ESYS,       0
+SECNUM,   1
+LMESH,      9
+
+TYPE,   1
+MAT,       1
+REAL,
+ESYS,       0
+SECNUM,   1
+LMESH,      10
+
+TYPE,   1
+MAT,       1
+REAL,
+ESYS,       0
+SECNUM,   1
+LMESH,      11
+
+TYPE,   1
+MAT,       1
+REAL,
+ESYS,       0
+SECNUM,   1
+LMESH,      12
+
+TYPE,   1
+MAT,       1
+REAL,
+ESYS,       0
+SECNUM,   1
+LMESH,      13
+
+TYPE,   1
+MAT,       1
+REAL,
+ESYS,       0
+SECNUM,   1
+LMESH,      14
+
+TYPE,   1
+MAT,       1
+REAL,
+ESYS,       0
+SECNUM,   1
+LMESH,      15
+
+
+TYPE,   1
+MAT,       1
+REAL,
+ESYS,       0
+SECNUM,   1
+LMESH,      16
+
+TYPE,   1
+MAT,       1
+REAL,
+ESYS,       0
+SECNUM,   1
+LMESH,      17
+
+TYPE,   1
+MAT,       1
+REAL,
+ESYS,       0
+SECNUM,   1
+LMESH,      18
+
+
+!================== Malha das barras
+
+LESIZE,ALL, , ,1, ,1, , ,1,
+
+TYPE,   1
+MAT,       2
+REAL,
+ESYS,       0
+SECNUM,   2
+LMESH,      19
+
+TYPE,   1
+MAT,       2
+REAL,
+ESYS,       0
+SECNUM,   2
+LMESH,      20
+
+TYPE,   1
+MAT,       2
+REAL,
+ESYS,       0
+SECNUM,   2
+LMESH,      21
+
+TYPE,   1
+MAT,       2
+REAL,
+ESYS,       0
+SECNUM,   2
+LMESH,      22
+
+TYPE,   1
+MAT,       2
+REAL,
+ESYS,       0
+SECNUM,   2
+LMESH,      23
+
+
+TYPE,   1
+MAT,       2
+REAL,
+ESYS,       0
+SECNUM,   2
+LMESH,      24
+
+
+TYPE,   1
+MAT,       2
+REAL,
+ESYS,       0
+SECNUM,   2
+LMESH,      25
+
+TYPE,   1
+MAT,       2
+REAL,
+ESYS,       0
+SECNUM,   2
+LMESH,      26
+
+TYPE,   1
+MAT,       2
+REAL,
+ESYS,       0
+SECNUM,   2
+LMESH,      27
+
+TYPE,   1
+MAT,       2
+REAL,
+ESYS,       0
+SECNUM,   2
+LMESH,      28
+
+TYPE,   1
+MAT,       2
+REAL,
+ESYS,       0
+SECNUM,   2
+LMESH,      29
+
+TYPE,   1
+MAT,       2
+REAL,
+ESYS,       0
+SECNUM,   2
+LMESH,      30
+
+
+!================== Cabo que puxa
+
+TYPE,   1
+MAT,       3
+REAL,
+ESYS,       0
+SECNUM,   3
+LMESH,      31
+
+
+
+!================== Pre-tensao nos cabos [Pa]
+t1 = (DISTKP(1,2)-l1)*Ecabo/l1
+t2 = (DISTKP(2,3)-l2)*Ecabo/l2
+t3 = (DISTKP(3,4)-l3)*Ecabo/l3
+t4 = (DISTKP(4,5)-l4)*Ecabo/l4
+t5 = (DISTKP(5,6)-l5)*Ecabo/l5
+t6 = (DISTKP(6,7)-l6)*Ecabo/l6
+t7 = (DISTKP(8,9)-l7)*Ecabo/l7
+t8 = (DISTKP(9,10)-l8)*Ecabo/l8
+t9 = (DISTKP(10,11)-l9)*Ecabo/l9
+t10 = (DISTKP(11,12)-l10)*Ecabo/l10
+t11 = (DISTKP(12,13)-l11)*Ecabo/l11
+t12 = (DISTKP(13,14)-l12)*Ecabo/l12
+t13 = (DISTKP(7,14)-l13)*Ecabo/l13
+t14 = (DISTKP(6,13)-l14)*Ecabo/l14
+t15 = (DISTKP(5,12)-l15)*Ecabo/l15
+t16 = (DISTKP(4,11)-l16)*Ecabo/l16
+t17 = (DISTKP(3,10)-l17)*Ecabo/l17
+t18 = (DISTKP(2,9)-l18)*Ecabo/l18
+
+t31 = cargapuxa*9.81/Anylon
+
+!=================== Zerar rigidez de cabo fouxo
+
+*if,t1,GT,0,THEN
+inistate,defi,1,,,,t1,0,0,0,0,0
+*else
+LCLEAR,       1
+*endif
+
+*if,t2,GT,0,THEN
+inistate,defi,2,,,,t2,0,0,0,0,0
+*else
+LCLEAR,       2
+*endif
+
+*if,t3,GT,0,THEN
+inistate,defi,3,,,,t3,0,0,0,0,0
+*else
+LCLEAR,       3
+*endif
+
+*if,t4,GT,0,THEN
+inistate,defi,4,,,,t4,0,0,0,0,0
+*else
+LCLEAR,       4
+*endif
+
+*if,t5,GT,0,THEN
+inistate,defi,5,,,,t5,0,0,0,0,0
+*else
+LCLEAR,       5
+*endif
+
+*if,t6,GT,0,THEN
+inistate,defi,6,,,,t6,0,0,0,0,0
+*else
+LCLEAR,       6
+*endif
+
+*if,t7,GT,0,THEN
+inistate,defi,7,,,,t7,0,0,0,0,0
+*else
+LCLEAR,       7
+*endif
+
+*if,t8,GT,0,THEN
+inistate,defi,8,,,,t8,0,0,0,0,0
+*else
+LCLEAR,       8
+*endif
+
+*if,t9,GT,0,THEN
+inistate,defi,9,,,,t9,0,0,0,0,0
+*else
+LCLEAR,       9
+*endif
+
+*if,t10,GT,0,THEN
+inistate,defi,10,,,,t10,0,0,0,0,0
+*else
+LCLEAR,       10
+*endif
+
+*if,t11,GT,0,THEN
+inistate,defi,11,,,,t11,0,0,0,0,0
+*else
+LCLEAR,       11
+*endif
+
+*if,t12,GT,0,THEN
+inistate,defi,12,,,,t12,0,0,0,0,0
+*else
+LCLEAR,       12
+*endif
+
+*if,t13,GT,0,THEN
+inistate,defi,13,,,,t13,0,0,0,0,0
+*else
+LCLEAR,       13
+*endif
+
+*if,t14,GT,0,THEN
+inistate,defi,14,,,,t14,0,0,0,0,0
+*else
+LCLEAR,       14
+*endif
+
+*if,t15,GT,0,THEN
+inistate,defi,15,,,,t15,0,0,0,0,0
+*else
+LCLEAR,       15
+*endif
+
+*if,t16,GT,0,THEN
+inistate,defi,16,,,,t16,0,0,0,0,0
+*else
+LCLEAR,       16
+*endif
+
+*if,t17,GT,0,THEN
+inistate,defi,17,,,,t17,0,0,0,0,0
+*else
+LCLEAR,       17
+*endif
+
+*if,t18,GT,0,THEN
+inistate,defi,18,,,,t18,0,0,0,0,0
+*else
+LCLEAR,       18
+*endif
+
+!inistate,defi,1,,,,t1,0,0,0,0,0
+!inistate,defi,2,,,,t2,0,0,0,0,0
+!inistate,defi,3,,,,t3,0,0,0,0,0
+!inistate,defi,4,,,,t4,0,0,0,0,0
+!inistate,defi,5,,,,t5,0,0,0,0,0
+!inistate,defi,6,,,,t6,0,0,0,0,0
+!inistate,defi,7,,,,t7,0,0,0,0,0
+!inistate,defi,8,,,,t8,0,0,0,0,0
+!inistate,defi,9,,,,t9,0,0,0,0,0
+!inistate,defi,10,,,,t10,0,0,0,0,0
+!inistate,defi,11,,,,t11,0,0,0,0,0
+!inistate,defi,12,,,,t12,0,0,0,0,0
+!inistate,defi,13,,,,t13,0,0,0,0,0
+!inistate,defi,14,,,,t14,0,0,0,0,0
+!inistate,defi,15,,,,t15,0,0,0,0,0
+!inistate,defi,16,,,,t16,0,0,0,0,0
+!inistate,defi,17,,,,t17,0,0,0,0,0
+!inistate,defi,18,,,,t18,0,0,0,0,0
+
+inistate,defi,31,,,,t31,0,0,0,0,0
+
+
+!================== Engaste na direcao Z
+/GO
+!D,ALL, ,0, , , ,UZ, , , , ,
+
+!================== Engaste na base
+/GO
+D,1, ,0, , , ,ALL, , , , ,
+D,8, ,0, , , ,ALL, , , , ,
+D,15, ,0, , , ,ALL, , , , ,
+
+
+EMATWRITE,YES
+FINISH  
+/AUX2   
+FILE,'file','full',' '  
+HBMAT,'Massa',' ',' ',ASCII,MASS,YES
+FINISH  
+!*  
+!   
+!*  
+FINISH  
+/AUX2   
+FILE,'file','full',' '  
+HBMAT,'Rigidez',' ',' ',ASCII,STIFF,YES 
+FINISH 
+
+
+/SOL 
+ANTYPE,2 
+EXPASS,0 
+MODOPT,LANB,16  
+EQSLV,SPAR  
+MXPAND,16, , ,0 
+LUMPM,0 
+PSTRES,0
+MODOPT,LANB,16,0,0, ,OFF
+/STATUS,SOLU
+SOLVE   
+finish
+/POST1  
+SET,LIST,2 
