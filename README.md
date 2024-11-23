@@ -1,7 +1,9 @@
 # Tensegrity
 MATLAB scripts for tensegrity systems
 
-This work is part of the PhD thesis entitled "Statics, form-finding and dynamics of tensegrity systems" authored by Victor Paiva, advised by Dr. Paulo Kurka and co-advised by Dr. Jaime Izuka at the Universidade Estadual de Campinas UNICAMP (Brazil). The article entitled "A form-finding method for deployable tensegrity arms and inverse kinematics" published in Meccanica integrates the thesis as a chapter. Please access https://link.springer.com/article/10.1007/s11012-024-01880-5 for a full description of the method and consider citing our work.
+This work is part of the PhD thesis entitled "Statics, form-finding and dynamics of tensegrity systems" authored by Victor Paiva, advised by Dr. Paulo Kurka and co-advised by Dr. Jaime Izuka at the Universidade Estadual de Campinas UNICAMP (Brazil). 
+
+The article entitled "A form-finding method for deployable tensegrity arms and inverse kinematics" published in Meccanica integrates the thesis as a chapter. Please access https://link.springer.com/article/10.1007/s11012-024-01880-5 for a full description of the method and consider citing our work.
 
 Scripts descriptions:
 ffQuad.m - Solves the form-finding problem of a counterclockwise quadruplex tensegrity by nonlinear programming 
