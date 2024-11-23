@@ -1,6 +1,6 @@
 function [ Ksig,f ] = calculaKsig( Co, df, Inc, Klin, KlinB,m,lR )
 %Encontra a matriz de rigidez global e o vetor carregamento considerando
-%peso próprio para g=9.81m/s²
+%peso prÃ³prio para g=9.81m/sÂ²
 
     
     % Conectividade conforme notacao de Skelton
@@ -30,7 +30,7 @@ function [ Ksig,f ] = calculaKsig( Co, df, Inc, Klin, KlinB,m,lR )
             
             Kel = Klin(q);
                  
-%             % Diminuir rigidez em deformaçao maior que 20%
+%             % Diminuir rigidez em deformaÃ§ao maior que 20%
 %             if (he-lR(q))/lR(q)>=.20
 %                 Kel = Kel*.9;
 %             end
