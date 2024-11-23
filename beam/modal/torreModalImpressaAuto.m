@@ -2,11 +2,11 @@ clear all
 close all
 clc
 
-% Determina as frequências naturais das posições estáticas intermediárias
+% Determina as frequÃªncias naturais das posiÃ§Ãµes estÃ¡ticas intermediÃ¡rias
 
 maiorsig = 0;
 %% Input data
-% Dados das simulacoes estáticas
+% Dados das simulacoes estÃ¡ticas
 CoEnsS = load('CoSim148');
 loadsS = load('loads148');
 CoEns = CoEnsS.CoSim;
@@ -40,10 +40,10 @@ for ens=1:length(loads)
     % Massa da estrutura [kg]
     m = .29*14/12;
 
-    % Densidade [kg/m³]
+    % Densidade [kg/mÂ³]
     cabo.rho = 0;
 
-    % Incidência [no1 no2 1=cabo]
+    % IncidÃªncia [no1 no2 1=cabo]
     Incid = [1	2	1
     2	3	1
     3	4	1
@@ -91,10 +91,10 @@ for ens=1:length(loads)
     p15 = [.42,.01];
     Co = [Co;p15];
 
-    % Matriz dos nós [m]
+    % Matriz dos nÃ³s [m]
     N = Co';
 
-    % Número de nós
+    % NÃºmero de nÃ³s
     n = length(N);
 
     % Matriz de conectividade
@@ -108,13 +108,13 @@ for ens=1:length(loads)
     % Matriz dos membros
     M = N * C';
 
-    %% Rigidez L=sig*(In-m.m'/||m||²)+K*m.m'/||m||²
+    %% Rigidez L=sig*(In-m.m'/||m||Â²)+K*m.m'/||m||Â²
     Kg = zeros(2*n,2*n);
     Mg = Kg;
     Mg2 = Mg;
     for q = 1:length(Incid)
 
-        % Encontrar os nós e os graus de liberade do elemento
+        % Encontrar os nÃ³s e os graus de liberade do elemento
         no = [Incid(q,1) Incid(q,2)];
         gdl1 = [no(1)*2-1, no(1)*2];
         gdl2 = [no(2)*2-1, no(2)*2];
@@ -130,13 +130,13 @@ for ens=1:length(loads)
             rho = m/12/A/le;
             E = barra.E;
 
-            % Pré-tensão
+            % PrÃ©-tensÃ£o
             sig = 0;
 
             % Rigidez da barra
             Kel = KlinB;
 
-            % L=sig*(In-m.m'/||m||²)+K*m.m'/||m||²
+            % L=sig*(In-m.m'/||m||Â²)+K*m.m'/||m||Â²
             L = sig*(eye(2)-M(:,q)*M(:,q)'./norm(M(:,q))^2)+ Kel*M(:,q)*M(:,q)'./norm(M(:,q))^2;
 
         else
@@ -172,7 +172,7 @@ for ens=1:length(loads)
                 Kel = E * A / le;
             end
 
-            % L=sig*(In-m.m'/||m||²)+K*m.m'/||m||²
+            % L=sig*(In-m.m'/||m||Â²)+K*m.m'/||m||Â²
             L = sig*(eye(2)-M(:,q)*M(:,q)'./norm(M(:,q))^2)+ Kel*M(:,q)*M(:,q)'./norm(M(:,q))^2;
         end
 
@@ -185,13 +185,13 @@ for ens=1:length(loads)
                 1 0 2 0
                 0 1 0 2] * (rho*A*le/6);
 
-        % Superposição da massa
+        % SuperposiÃ§Ã£o da massa
         Mg(no(1)*2-1:no(1)*2,no(1)*2-1:no(1)*2) = Mg(no(1)*2-1:no(1)*2,no(1)*2-1:no(1)*2) + Ms(1:2,1:2);
         Mg(no(1)*2-1:no(1)*2,no(2)*2-1:no(2)*2) = Mg(no(1)*2-1:no(1)*2,no(2)*2-1:no(2)*2) + Ms(1:2,3:4);
         Mg(no(2)*2-1:no(2)*2,no(1)*2-1:no(1)*2) = Mg(no(2)*2-1:no(2)*2,no(1)*2-1:no(1)*2) + Ms(3:4,1:2);
         Mg(no(2)*2-1:no(2)*2,no(2)*2-1:no(2)*2) = Mg(no(2)*2-1:no(2)*2,no(2)*2-1:no(2)*2) + Ms(3:4,3:4);
 
-        % Superposição da rigidez
+        % SuperposiÃ§Ã£o da rigidez
         Kg = Kg + Ke;
     end
 
@@ -233,7 +233,7 @@ for ens=1:length(loads)
     Mds = Mds(I);
     ModVec = ModVec(:,I);
 
-    % Armazenar as frequências
+    % Armazenar as frequÃªncias
     freq(:,ens) = Mds;
 
 end
